@@ -1,3 +1,5 @@
-# Jetpack_Compose
+# Jetpack_Compose Pet Projects
 
-Buiding Android App with Jetpack Compose
+Buiding Android Apps with Jetpack Compose
+
+
