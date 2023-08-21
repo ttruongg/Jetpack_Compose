@@ -1,1 +1,3 @@
-# Display gird list
+# COURESES APP
+
+Display grid list 
