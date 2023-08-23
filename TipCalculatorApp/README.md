@@ -1,4 +1,4 @@
-Tip Time App
+Tip Calculator App
 =================================
 
 
