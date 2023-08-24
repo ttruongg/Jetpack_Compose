@@ -12,6 +12,7 @@ teaching about user input, and State in Compose.
  - Use remember and mutableStateOf to keep track of relevant state in the app
  - VerticalScoll
  - KeyboardType
+ - Local and Instrumentation Tests
 
 
 
