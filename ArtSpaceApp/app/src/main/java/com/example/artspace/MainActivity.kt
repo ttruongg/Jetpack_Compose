@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,7 +63,7 @@ fun ArtSpaceApp() {
         mutableStateOf(1)
     }
 
-    when (currentImage){
+    when (currentImage) {
         1 -> {
             ArtImage(
                 imageResource = R.drawable.image1,
@@ -112,18 +113,33 @@ fun ArtImage(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Image(
-            painter = painterResource(id = imageResource),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-        )
+        Column {
+            Surface(
+                border = BorderStroke(3.dp, Color.Gray),
+                modifier = Modifier.size(300.dp, 300.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = imageResource),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(250.dp)
+                        .padding(24.dp),
+                )
+            }
 
-        ButtonNextandPrevious(
-            btnNext = onClickNext,
-            btnPrevious = onClickPrevious
-        )
+        }
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomCenter),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            ButtonNextandPrevious(
+                btnNext = onClickNext,
+                btnPrevious = onClickPrevious
+            )
+        }
+
     }
 
 
@@ -139,14 +155,18 @@ fun ButtonNextandPrevious(
 
     Row(
         modifier = modifier
-            .fillMaxSize()
-            .padding(36.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Bottom
+            .fillMaxWidth()
+            .padding(bottom = 20.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
+        //verticalAlignment = Alignment.Bottom
 
     ) {
         Button(
-            onClick = btnNext
+            onClick = btnNext,
+            modifier = Modifier.padding(
+                start = 16.dp,
+                bottom = 16.dp
+            )
         ) {
             Text(
                 text = stringResource(id = R.string.Previous),
@@ -154,7 +174,13 @@ fun ButtonNextandPrevious(
             )
         }
 
-        Button(onClick = btnPrevious) {
+        Button(
+            onClick = btnPrevious,
+            modifier = Modifier.padding(
+                start = 16.dp,
+                bottom = 16.dp
+            )
+        ) {
             Text(
                 text = stringResource(id = R.string.Next),
                 fontSize = 16.sp
@@ -170,7 +196,7 @@ fun ButtonNextandPrevious(
 @Composable
 fun GreetingPreview() {
     ArtSpaceTheme {
-
+        ArtSpaceApp()
     }
 
 }
