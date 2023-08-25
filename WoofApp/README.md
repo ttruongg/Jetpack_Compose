@@ -5,9 +5,11 @@ The Woof app is a list of dog photos with information about them including their
 
 Introduction
 ------------
-- Dis play list
+- Display list
 - Using theme : add color, add shape, add typography
 - Add a top bar
+- Add IconButton (ExpandMore, ExpandLess)
+- Add animation (Spring , and when user click item then this item will change color)
 
 
 
