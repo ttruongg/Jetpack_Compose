@@ -4,11 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.superheroes.data.HeroesRepository
 import com.example.superheroes.model.SuperHero
@@ -24,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HeroList(Superheroes = HeroesRepository.heroes)
+                    HeoroApp()
                 }
             }
         }
@@ -32,11 +37,36 @@ class MainActivity : ComponentActivity() {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HeoroApp(){
+    Scaffold(
+        topBar ={
+            TopAppBar()
+        }
+    ) {
+        HeroList(Superheroes = HeroesRepository.heroes, modifier = Modifier.padding(it))
+    }
+}
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar(modifier: Modifier = Modifier){
+    CenterAlignedTopAppBar(
+        title = {
+            Text(text = stringResource(id = R.string.app_name))
+        },
+        modifier = modifier
+    )
+}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     SuperheroesTheme {
+        HeoroApp()
 
     }
 }
