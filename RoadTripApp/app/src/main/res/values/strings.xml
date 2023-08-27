@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RoadTrip</string>
+    <string name="canyon_de_chelly">Canyon De Chelly</string>
+    <string name="dust_and_light">Dust and Light</string>
+    <string name="electric_car">Electric Car</string>
+    <string name="molten">Molten</string>
+    <string name="monument_valley_overlook">Monument Vallet Overlook</string>
+    <string name="orange_sunset">Orange Sunset</string>
+    <string name="the_photograper">The photographer</string>
+    <string name="valley_sunset">Valley Sunset</string>
+</resources>
