@@ -73,16 +73,29 @@ class GameViewModel : ViewModel() {
         updateUserGuess("")
     }
 
-    private fun updateGameState(updatedScore: Int){
-        _uiState.update { currentState ->
-            currentState.copy(
-                isGuessWordWrong = false,
-                currentScrambleWord = pickRandomAndShuffle(),
-                score = updatedScore,
-                currentWordCount = currentState.currentWordCount.inc()
-            )
+    private fun updateGameState(updatedScore: Int) {
+        if (usedWord.size == MAX_NO_OF_WORDS) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    isGuessWordWrong = false,
+                    score = updatedScore,
+                    isGameOver = true
+                )
+            }
+
+        } else {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    isGuessWordWrong = false,
+                    currentScrambleWord = pickRandomAndShuffle(),
+                    score = updatedScore,
+                    currentWordCount = currentState.currentWordCount.inc()
+                )
+
+            }
 
         }
+
     }
 
     fun SkipWord(){
