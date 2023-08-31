@@ -1,5 +1,6 @@
 package com.example.unscramble.data.ui.test
 
+import com.example.unscramble.data.MAX_NO_OF_WORDS
 import com.example.unscramble.data.SCORE_INCREASE
 import com.example.unscramble.data.getUnscrambledWord
 import com.example.unscramble.ui.GameViewModel
@@ -79,6 +80,48 @@ class GameViewModelTest {
         //Assert that isGameOver = false
         assertFalse(gameUiState.isGameOver)
 
+    }
+    @Test
+    fun gameViewModel_AllWordGuessed_UiStateUpdatedCorrectly(){
+        var expectedScore = 0
+        var currentGameUiState = viewModel.uiState.value
+        var correctWord = getUnscrambledWord(currentGameUiState.currentScrambleWord)
+        repeat(MAX_NO_OF_WORDS){
+            expectedScore += SCORE_INCREASE
+            viewModel.updateUserGuess(correctWord)
+            viewModel.checkUserGuess()
+
+            currentGameUiState = viewModel.uiState.value
+            correctWord = getUnscrambledWord(currentGameUiState.currentScrambleWord)
+            // Assert that after each correct answer, score is updated correctly.
+
+            assertEquals(expectedScore, currentGameUiState.score)
+        }
+
+        // Assert after all answer, currentWordCount = MAX_NO_OF_WORDS
+        assertEquals(currentGameUiState.currentWordCount, MAX_NO_OF_WORDS)
+        // Assert after MAX_NO_OF_WORDS, the game is over
+        assertTrue(currentGameUiState.isGameOver)
+
+
+    }
+
+    @Test
+    fun gameViewModel_WordSkipped_ScoreUnchangedAndWordCountIncreased() {
+        var currentGameUiState = viewModel.uiState.value
+        val correctPlayerWord = getUnscrambledWord(currentGameUiState.currentScrambleWord)
+        viewModel.updateUserGuess(correctPlayerWord)
+        viewModel.checkUserGuess()
+
+        currentGameUiState = viewModel.uiState.value
+        val lastWordCount = currentGameUiState.currentWordCount
+        viewModel.SkipWord()
+        currentGameUiState = viewModel.uiState.value
+
+        // Assert that score remains unchanged after word is skipped.
+        assertEquals(SCORE_AFTER_FIRST_CORRECT_ANSWER, currentGameUiState.score)
+        // Assert that word count is increased by 1 after word is skipped.
+        assertEquals(lastWordCount + 1, currentGameUiState.currentWordCount)
     }
 
 
